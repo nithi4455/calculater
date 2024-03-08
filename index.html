@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Calculator</title>
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .calculator {
+        background-color: #444;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+    }
+    .calculator-display {
+        background-color: #222;
+        color: #fff;
+        font-size: 2rem;
+        padding: 10px;
+        text-align: right;
+        border: none;
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        outline: none;
+    }
+    .calculator-key {
+        background-color: #555;
+        color: #fff;
+        font-size: 1.5rem;
+        padding: 15px;
+        margin: 5px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .calculator-key:hover {
+        background-color: #777;
+    }
+</style>
+</head>
+<body>
+<div class="calculator">
+    <input type="text" id="display" class="calculator-display" readonly>
+    <div>
+        <button class="calculator-key" onclick="addToDisplay('7')">7</button>
+        <button class="calculator-key" onclick="addToDisplay('8')">8</button>
+        <button class="calculator-key" onclick="addToDisplay('9')">9</button>
+        <button class="calculator-key" onclick="addToDisplay('+')">+</button>
+    </div>
+    <div>
+        <button class="calculator-key" onclick="addToDisplay('4')">4</button>
+        <button class="calculator-key" onclick="addToDisplay('5')">5</button>
+        <button class="calculator-key" onclick="addToDisplay('6')">6</button>
+        <button class="calculator-key" onclick="addToDisplay('-')">-</button>
+    </div>
+    <div>
+        <button class="calculator-key" onclick="addToDisplay('1')">1</button>
+        <button class="calculator-key" onclick="addToDisplay('2')">2</button>
+        <button class="calculator-key" onclick="addToDisplay('3')">3</button>
+        <button class="calculator-key" onclick="addToDisplay('*')">*</button>
+    </div>
+    <div>
+        <button class="calculator-key" onclick="clearDisplay()">C</button>
+        <button class="calculator-key" onclick="addToDisplay('0')">0</button>
+        <button class="calculator-key" onclick="calculate()">=</button>
+        <button class="calculator-key" onclick="addToDisplay('/')">/</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('keydown', function(event) {
+        const key = event.key;
+        if (!isNaN(key) || key === '.' || key === '+' || key === '-' || key === '*' || key === '/' || key === 'Enter' || key === 'Backspace') {
+            // Valid keys
+        } else {
+            alert('Warning: Only numbers are allowed!');
+            event.preventDefault();
+        }
+    });
+
+    function addToDisplay(value) {
+        const display = document.getElementById('display');
+        display.value += value;
+    }
+
+    function clearDisplay() {
+        const display = document.getElementById('display');
+        display.value = '';
+    }
+
+    function calculate() {
+        const display = document.getElementById('display');
+        try {
+            display.value = eval(display.value);
+        } catch (error) {
+            display.value = 'Error';
+        }
+    }
+</script>
+</body>
+</html>
